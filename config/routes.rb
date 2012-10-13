@@ -1,10 +1,14 @@
 Socialkart::Application.routes.draw do
 
+  root :to => 'home#index'
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  root :to => 'home#index'
+  resources :items, only: [:create, :destroy, :new] 
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
