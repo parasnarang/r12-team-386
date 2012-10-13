@@ -10,6 +10,8 @@ class ItemsController < ApplicationController
       @item.name = params[:t]
       @item.price = params[:s]
       @item.image_url = params[:z]
+
+      @boards = current_user.boards
     else
       redirect_to root_url, notice: "Please use the bookmarklet"
     end
