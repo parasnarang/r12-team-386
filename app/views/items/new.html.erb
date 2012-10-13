@@ -1,1 +1,9 @@
-<%= params.inspect.to_yaml %>
+<%= simple_form_for(@item, :html => {:class => 'form-horizontal'}, :defaults => { :label => false} ) do |f| %>
+  <%= image_tag @item.image_url %>
+  <%= f.input :name %>
+  <%= f.input :price %>
+  <%= f.input :product_url %>
+  <%= f.input :image_url, :hidden => true %>
+  <%= f.association :board %>
+  <%= f.button :submit %>
+<% end %>
