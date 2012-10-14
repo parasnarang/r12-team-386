@@ -4,8 +4,18 @@ class BoardsController < ApplicationController
   before_filter :owns_board, only: [:destroy]
   
   def show
+    #debugger
     @board = Board.find(params[:id])
     @items = @board.items
+    @authorized_uids = @board.authorized_uids
+    @board_users = []
+    @board_users.append(@board.user)
+    @authorized_uids.each do |uid|
+      user = User.find_by_uid(uid)
+      if user
+        @board_users.append(user)
+      end
+    end
   end
 
   def destroy

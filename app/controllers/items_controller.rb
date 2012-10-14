@@ -45,6 +45,17 @@ class ItemsController < ApplicationController
     @value = params[:type] == "up" ? 1 : -1
     @item = Item.find(params[:id])
     @item.add_or_update_evaluation(:votes, @value, current_user)
+
+    @board = @item.board
+    @authorized_uids = @board.authorized_uids
+    @board_users = []
+    @board_users.append(@board.user)
+    @authorized_uids.each do |uid|
+      user = User.find_by_uid(uid)
+      if user
+        @board_users.append(user)
+      end
+    end
     respond_to do |format|
       format.html { redirect_to :back, notice: "Thanks for voting!" }
       format.js 

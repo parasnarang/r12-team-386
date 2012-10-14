@@ -1,22 +1,47 @@
-<%= @board.name %>
+<span id="boardHeader">
+  <%= @board.name %>
+
+
 <%= render 'layouts/fb_invite' %>
+</span>
 
 <div id="board">
 <% @items.each do |item|  %>
- 
+   
+  <% @vote = current_user.voted_for(item) %>
 
   <div class="item">
     
     <div class="vote">
-      <%= link_to image_tag("arrow-up-off.png"), vote_item_path(item, type: "up"), { method: "post", class: "vote-up-off", remote: true} %>
+      <% if @vote == 1  %>
+        <%= link_to image_tag("arrow-up-on.png"), vote_item_path(item, type: "up"), { method: "post", class: "vote-up-on", 
+                                                                                       remote: true, id: "vote-up-#{item.id}"} %>
+      <% else %>
+        <%= link_to image_tag("arrow-up-off.png"), vote_item_path(item, type: "up"), { method: "post", class: "vote-up-off", 
+                                                                                       remote: true, id: "vote-up-#{item.id}"} %>
+      <% end %>
+
       <%= render 'items/vote_count', item: item %>
-      <%= link_to image_tag("arrow-down-off.png"), vote_item_path(item, type: "down"), {method: "post", class: "vote-down-off", remote: true} %>
+
+      <% if @vote == -1 %>
+        <%= link_to image_tag("arrow-down-on.png"), vote_item_path(item, type: "down"), {method: "post", class: "vote-down-on", 
+                                                                                        remote: true, id: "vote-down-#{item.id}"} %>
+
+      <% else %>
+        <%= link_to image_tag("arrow-down-off.png"), vote_item_path(item, type: "down"), {method: "post", class: "vote-down-off", 
+                                                                                          remote: true, id: "vote-down-#{item.id}"} %>
+      <% end %>
     </div>
 
     <%= image_tag item.image_url, class: "itemImage" %>
     <span class="itemName">
       <%= link_to item.name, item.product_url %>
     </span>
+
+    <div id="voters-<%= item.id %>">
+      <%= render 'items/voters', item: item, board_users: @board_users   %>
+    </div>
+
   </div>
 
 <% end %>

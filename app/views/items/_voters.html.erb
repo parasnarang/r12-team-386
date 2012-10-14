@@ -1,0 +1,20 @@
+<% @upvoters = Item.upvoters(item, board_users) %>
+<% if @upvoters.count != 0 %>
+  <div class="upvoters">
+    <%= image_tag("arrow-up-on.png") %>
+    <% @upvoters.each do |u| %>
+      <%= content_tag :span, u.name, class: ".voters" %>
+    <% end %>
+  </div>
+ <% end %>
+
+
+<% @downvoters = Item.downvoters(item, board_users) %>
+<% if @downvoters.count != 0 %>
+  <div class="downvoters">
+    <%= image_tag("arrow-down-on.png") %>
+    <% @downvoters.each do |u| %>
+      <%= content_tag :span, u.name, class: ".voters" %>
+    <% end %>
+  </div>
+<% end %>

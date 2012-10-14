@@ -1,2 +1,17 @@
 $('#item-vote-<%= @item.id %>').html('<%= @item.reputation_for(:votes).to_i %>');
+<% if @value == 1  %>
+    $('#vote-up-<%= @item.id %>').find('img').attr('src', '/assets/arrow-up-on.png');
+    $('#vote-down-<%= @item.id %>').find('img').attr('src', '/assets/arrow-down-off.png');
+<% else %>
+    $('#vote-up-<%= @item.id %>').find('img').attr('src', '/assets/arrow-up-off.png');
+    $('#vote-down-<%= @item.id %>').find('img').attr('src', '/assets/arrow-down-on.png');
+<% end %>
+$("#voters-<%= @item.id %>").html("")
+
+$("#voters-<%= @item.id %>").html("<%= j render 'items/voters', item: @item, board_users: @board_users %>")
+
+
+
+
+
 

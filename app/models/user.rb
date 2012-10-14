@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :boards, :dependent => :destroy
   has_many :items, :dependent => :destroy
 
-  has_many :evaluations, class_name: "RSEvaluation", as: :source
+  has_many :evaluations, class_name: "ReputationSystem::Evaluation", as: :source
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -31,9 +31,11 @@ class User < ActiveRecord::Base
   end
 
   def voted_for(item)
-    eval = evaluations.where(target_type: item.class, target_id: haiku.id).first
-    if eval.exists?
-      return eval.value
+    #debugger
+    eval = evaluations.where(target_type: item.class, target_id: item.id).present?
+    if eval
+      e = evaluations.where(target_type: item.class, target_id: item.id).first
+      return e.value
     else
       return 0
     end

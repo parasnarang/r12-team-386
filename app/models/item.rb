@@ -19,4 +19,29 @@ class Item < ActiveRecord::Base
   belongs_to :user
 
   has_reputation :votes, source: :user, aggregated_by: :sum
+
+  def self.upvoters(item, board_users)
+    upvoters = []
+    board_users.each do |user|  
+      v = user.voted_for(item) 
+      if v == 1 
+        upvoters.append(user) 
+      end 
+    end
+    return upvoters
+  end
+
+
+  def self.downvoters(item, board_users)
+    downvoters = []
+    board_users.each do |user|  
+      v = user.voted_for(item) 
+      if v == -1 
+        downvoters.append(user) 
+      end 
+    end
+    return downvoters
+  end
+
+
 end

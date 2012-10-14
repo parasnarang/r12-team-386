@@ -1,6 +1,13 @@
-This is home controller
+<div class="center hero-unit">
+ <h1>Welcome to SocialKart</h1>
 
-<% if current_user %>
-<div id="friends">
+ 
+  <h2>
+    SocialKart lets you do quick comparisons of <a href="www.flipkart.com">Flipkart</a> products, with the help of your Facebook friends. 
+
+    Drag the <a href="bookmarklet.html" class="btn">Socialkart bookmarklet</a> to your bookmarks bar. You will need to sign up before continuing. 
+
+  </h2>
+
+  <%= link_to "Sign up with Facebook", "/auth/facebook", {class: "btn btn-large btn-primary"} %>
 </div>
-<% end %>
