@@ -1,1 +1,2 @@
-$('vote-count-#{
+$('#item-vote-<%= @item.id %>').html('<%= @item.reputation_for(:votes).to_i %>');
+

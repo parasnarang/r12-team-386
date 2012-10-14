@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.add_or_update_evaluation(:votes, @value, current_user)
     respond_to do |format|
-      format.html redirect_to :back, notice: "Thanks for voting!"
+      format.html { redirect_to :back, notice: "Thanks for voting!" }
       format.js 
     end
   end
