@@ -6,7 +6,10 @@ Socialkart::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :items, only: [:create, :destroy, :new] 
+  resources :items, only: [:create, :destroy, :new] do 
+    member { post :vote }
+  end
+
   resources :boards, only: [:show, :destroy]
 
   # The priority is based upon order of creation:

@@ -1,2 +1,10 @@
-<h1>Boards#show</h1>
-<p>Find me in app/views/boards/show.html.erb</p>
+<%= @board.name %>
+<div>
+<% @items.each do |item|  %>
+  <%= image_tag item.image_url %>
+  <%= link_to item.name, item.product_url %>
+  <%= pluralize item.reputation_for(:votes).to_i, "vote" %>
+  <%= link_to "up", vote_item_path(item, type: "up"), method: "post" %> |
+  <%= link_to "down", vote_item_path(item, type: "down"), method: "post"%>
+<% end %>
+</div>

@@ -18,14 +18,15 @@ class ItemsController < ApplicationController
   end
 
   def create 
+    debugger
     if params
-      if params[:new_board] != "New Board"
+      if params[:item][:new_board] != ""
         @board = current_user.boards.new
-        @board.name = params[:board_name]
+        @board.name = params[:item][:new_board]
         @board.save
       else
-        board = Board.find(params[:item][:board_id])
-        unless board.user == current_user
+        @board = Board.find(params[:item][:board_id])
+        unless @board.user == current_user
           redirect_to root_path, error: "That board is none of your business."
         end
       end
@@ -34,9 +35,16 @@ class ItemsController < ApplicationController
       @item.product_url = params[:item][:product_url]
       @item.image_url = params[:item][:image_url]
       @item.price = params[:item][:price]
-      @item.board = board
+      @item.board = @board
       @item.save
       redirect_to board_path(id: @board.id)
     end
+  end
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @item = Item.find(params[:id])
+    @item.add_or_update_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: "Thanks for voting!"
   end
 end

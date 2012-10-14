@@ -7,10 +7,10 @@
 #  price       :string(255)      not null
 #  image_url   :string(255)
 #  product_url :string(255)
-#  votes       :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  board_id    :integer
+#  user_id     :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

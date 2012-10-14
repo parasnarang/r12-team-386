@@ -10,7 +10,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'friendly_id', '~> 4.0.1' 
 gem 'activeadmin'
-
+gem 'activerecord-reputation-system', require: 'reputation_system'
 
 
 # Gems used only for assets and not required
@@ -46,4 +46,4 @@ gem 'omniauth-facebook', '1.4.0'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
