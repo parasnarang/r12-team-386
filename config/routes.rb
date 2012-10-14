@@ -7,7 +7,7 @@ Socialkart::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :items, only: [:create, :destroy, :new] 
-
+  resources :boards, only: [:show, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

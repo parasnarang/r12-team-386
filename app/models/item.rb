@@ -14,7 +14,7 @@
 #
 
 class Item < ActiveRecord::Base
-  attr_accessible :image_url, :name, :price, :url, :votes
+  attr_accessible :image_url, :name, :price, :product_url, :votes, :board_id, :new_board
   belongs_to :board
   belongs_to :user
 end

@@ -6,16 +6,12 @@
   <%= f.input :image_url  %>
   
   <div class="boardlist">
-    <ul>
-      <% @boards.each do |board| %>
-        <%= content_tag :li, board.name, data: { id: board.id } %>
-      <% end %>
-    </ul>
+    <%= f.association :board %>
     <%= link_to "Or Create a New Board", "#", :id => "newBoardButton" %>
   </div>
 
   <div class ="newBoard">
-    <input type="text" Value="New Board" id="board_id" />
+    <input type="text" id="board_id" name="item[new_board]" />
     <%= link_to "Or Choose an Existing Board", "#", :id => "existingBoardButton" %>
   </div>
 
