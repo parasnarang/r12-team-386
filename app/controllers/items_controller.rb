@@ -42,9 +42,12 @@ class ItemsController < ApplicationController
   end
 
   def vote
-    value = params[:type] == "up" ? 1 : -1
+    @value = params[:type] == "up" ? 1 : -1
     @item = Item.find(params[:id])
-    @item.add_or_update_evaluation(:votes, value, current_user)
-    redirect_to :back, notice: "Thanks for voting!"
+    @item.add_or_update_evaluation(:votes, @value, current_user)
+    respond_to do |format|
+      format.html redirect_to :back, notice: "Thanks for voting!"
+      format.js 
+    end
   end
 end

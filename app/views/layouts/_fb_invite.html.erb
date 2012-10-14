@@ -1,0 +1,35 @@
+<p>
+  <%= button_tag 'Invite your facebook friends', :id => 'invite_fb_friends', class: 'btn' %>
+</p>
+
+<div id="fb-root"></div>
+
+<script src="http://connect.facebook.net/en_US/all.js"></script> 
+<script type="text/javascript">
+  $(function(){
+    $('#invite_fb_friends').click(function() {
+      FB.init({ 
+        appId : '139850259434486', 
+        status : true, 
+        cookie : false
+      });
+
+      FB.ui({method: 'apprequests', 
+             message: '<%= current_user.name %> wants your help in making a decision',
+        }, 
+        function (result) {
+          alert("hello");
+          
+          console.log(result.to);
+          console.log(result.to[0]);
+          $.post('/boards/authorized_uids', {authorized_uids: result.to, 
+                                            board: <%= @board.id %>});
+          // var to = res.to;
+          //console.log result.to;
+        } 
+      ); 
+    });
+    });
+</script>
+
+

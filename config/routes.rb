@@ -10,7 +10,9 @@ Socialkart::Application.routes.draw do
     member { post :vote }
   end
 
-  resources :boards, only: [:show, :destroy]
+  resources :boards, only: [:index, :show, :destroy] do
+    collection { post :authorized_uids }
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

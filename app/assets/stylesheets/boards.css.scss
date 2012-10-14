@@ -1,3 +1,58 @@
 // Place all the styles related to the boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import 'bootstrap' ;
+
+.board {
+  border: 2px solid white;
+  background-color: white;
+  padding: 20px;
+  float: left;
+  cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+.boardName {
+  @extend .btn;
+  font-size: 20px;
+  /*padding-left: 20px;*/
+  padding-left: auto;
+  padding-right: auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: block;
+}
+
+.boardImage {
+  /*display: block;*/
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.item {
+  @extend .board;
+}
+
+.itemName {
+  @extend .boardName;
+}
+
+.itemImage {
+  @extend .boardImage;
+}
+
+.vote {
+  float: left;
+  width: 40px;
+  padding-right: 30px;
+  padding-top: 40px;
+}
+
+.vote-count {
+  font-size: 24px;
+  padding: 10px;
+}

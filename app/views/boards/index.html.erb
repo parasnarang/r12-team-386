@@ -1,0 +1,10 @@
+<div id="boardsContainer">
+  <% @boards.each do |board|  %>
+  <div class="board" data-link="<%= board_path(id: board.id) %>"> 
+    <%= image_tag board.items.first.image_url, class: "board_image" %>
+    <span class="boardName">
+      <%= board.name %>
+    </span>
+  </div>
+  <% end %>
+</div>

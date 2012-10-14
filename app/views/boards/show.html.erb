@@ -1,10 +1,24 @@
 <%= @board.name %>
-<div>
+<%= render 'layouts/fb_invite' %>
+
+<div id="board">
 <% @items.each do |item|  %>
-  <%= image_tag item.image_url %>
-  <%= link_to item.name, item.product_url %>
-  <%= pluralize item.reputation_for(:votes).to_i, "vote" %>
-  <%= link_to "up", vote_item_path(item, type: "up"), method: "post" %> |
-  <%= link_to "down", vote_item_path(item, type: "down"), method: "post"%>
+ 
+
+  <div class="item">
+    
+    <div class="vote">
+      <%= link_to image_tag("arrow-up-off.png"), vote_item_path(item, type: "up"), { method: "post", class: "vote-up-off", remote: true} %>
+      <%= render 'items/vote_count', item: item %>
+      <%= link_to image_tag("arrow-down-off.png"), vote_item_path(item, type: "down"), {method: "post", class: "vote-down-off", remote: true} %>
+    </div>
+
+    <%= image_tag item.image_url, class: "itemImage" %>
+    <span class="itemName">
+      <%= link_to item.name, item.product_url %>
+    </span>
+  </div>
+
 <% end %>
 </div>
+

@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014103959) do
+ActiveRecord::Schema.define(:version => 20121014142943) do
+
+  create_table "authorized_uids", :force => true do |t|
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "authorized_uids_boards", :id => false, :force => true do |t|
+    t.integer "board_id"
+    t.integer "authorized_uid_id"
+  end
+
+  add_index "authorized_uids_boards", ["authorized_uid_id", "board_id"], :name => "index_authorized_uids_boards_on_authorized_uid_id_and_board_id"
+  add_index "authorized_uids_boards", ["board_id", "authorized_uid_id"], :name => "index_authorized_uids_boards_on_board_id_and_authorized_uid_id"
 
   create_table "boards", :force => true do |t|
     t.string   "name"
