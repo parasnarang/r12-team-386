@@ -5,13 +5,16 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'friendly_id', '~> 4.0.1' 
 gem 'activeadmin'
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
+group :production do 
+  gem 'mysql2'
+  gem 'therubyracer'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,6 +30,7 @@ end
 
 group :development do 
   gem 'annotate', ">=2.5.0"
+  gem 'sqlite3'
 end
 
 gem 'jquery-rails'
@@ -43,7 +47,7 @@ gem 'omniauth-facebook', '1.4.0'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 gem 'debugger'
