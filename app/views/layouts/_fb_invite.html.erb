@@ -18,10 +18,6 @@
              message: '<%= current_user.name %> wants your help in making a decision',
         }, 
         function (result) {
-          alert("hello");
-          
-          console.log(result.to);
-          console.log(result.to[0]);
           $.post('/boards/authorized_uids', {authorized_uids: result.to, 
                                             board: <%= @board.id %>});
           // var to = res.to;
