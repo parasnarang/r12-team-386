@@ -25,6 +25,9 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards
+    if @boards.count == 0
+      flash[:notice] = "Please use the bookmarklet on Flipkart to get started."
+    end
   end
 
   def authorized_uids
