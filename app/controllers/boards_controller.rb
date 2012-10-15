@@ -25,6 +25,16 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards
+
+    @uid = current_user.uid
+    @authorized = AuthorizedUid.find_by_uid(@uid)
+    unless @authorized.nil? do
+      @invited_boards =  @authorized.boards
+      @invited_boards.each do | ib|
+        @boards.append(ib)
+      end
+    end
+
     if @boards.count == 0
       flash[:notice] = "Please use the bookmarklet on Flipkart to get started."
     end
