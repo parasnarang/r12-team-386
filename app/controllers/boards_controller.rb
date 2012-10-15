@@ -35,7 +35,7 @@ class BoardsController < ApplicationController
       end
     end
 
-    if @boards.count == 0
+    if @boards.count == 0 && @invited_boards.count == 0
       flash[:notice] = "Please use the bookmarklet on Flipkart to get started."
     end
   end
@@ -55,9 +55,12 @@ class BoardsController < ApplicationController
   end
 
   def authorized_user
+    logger.info "Board id #{@board.id}"
+    logger.info "current_user.uid #{current_user.uid}"
     @board = Board.find(params[:id])
-    unless current_user == @board.user
-      unless @board.authorized_uids.include? current_user.uid
+    if current_user != @board.user
+      if !@board.authorized_uids.include? current_user.uid
+        logger.info "authorized_uids = #{@board.authorized_uids}"
         flash[:error] = "Access Denied"
         redirect_to root_path
       end
