@@ -28,7 +28,7 @@ class BoardsController < ApplicationController
 
     @uid = current_user.uid
     @authorized = AuthorizedUid.find_by_uid(@uid)
-    unless @authorized.nil? do
+    if !@authorized.nil? 
       @invited_boards =  @authorized.boards
       @invited_boards.each do | ib|
         @boards.append(ib)
