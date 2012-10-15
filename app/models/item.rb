@@ -21,6 +21,7 @@ class Item < ActiveRecord::Base
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   def self.upvoters(item, board_users)
+    debugger
     upvoters = []
     board_users.each do |user|  
       v = user.voted_for(item) 
@@ -33,6 +34,7 @@ class Item < ActiveRecord::Base
 
 
   def self.downvoters(item, board_users)
+    debugger
     downvoters = []
     board_users.each do |user|  
       v = user.voted_for(item) 

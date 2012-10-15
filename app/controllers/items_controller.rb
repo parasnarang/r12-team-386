@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def create 
-    debugger
+    #debugger
     if params
       if params[:item][:new_board] != ""
         @board = current_user.boards.new
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
     @item.add_or_update_evaluation(:votes, @value, current_user)
 
     @board = @item.board
-    @authorized_uids = @board.authorized_uids
+    @authorized_uids = @board.authorized_uids.select("uid").pluck(:uid)
     @board_users = []
     @board_users.append(@board.user)
     @authorized_uids.each do |uid|

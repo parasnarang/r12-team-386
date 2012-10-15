@@ -4,10 +4,10 @@ class BoardsController < ApplicationController
   before_filter :owns_board, only: [:destroy]
   
   def show
-    #debugger
+    debugger
     @board = Board.find(params[:id])
     @items = @board.items
-    @authorized_uids = @board.authorized_uids
+    @authorized_uids = @board.authorized_uids.select('uid').pluck(:uid)
     @board_users = []
     @board_users.append(@board.user)
     @authorized_uids.each do |uid|
@@ -24,6 +24,7 @@ class BoardsController < ApplicationController
   end
 
   def index
+    #debugger
     @boards = current_user.boards
 
     @uid = current_user.uid
@@ -41,7 +42,7 @@ class BoardsController < ApplicationController
   end
 
   def authorized_uids
-    debugger
+    #debugger
     @board = Board.find(params[:board])
     @uids = params[:authorized_uids]
     
@@ -55,12 +56,15 @@ class BoardsController < ApplicationController
   end
 
   def authorized_user
+    debugger
     @board = Board.find(params[:id])
     logger.info "Board id #{@board.id}"
     logger.info "current_user.uid #{current_user.uid}"
     if current_user != @board.user
-      if !@board.authorized_uids.select("uid").include? current_user.uid
-        logger.info "authorized_uids = #{@board.authorized_uids}"
+      @authorized_uids = @board.authorized_uids.select("uid").pluck(:uid)
+      
+      unless @authorized_uids.include? current_user.uid
+        logger.info "authorized_uids = #{@authorized_uids}"
         flash[:error] = "Access Denied"
         redirect_to root_path
       end
