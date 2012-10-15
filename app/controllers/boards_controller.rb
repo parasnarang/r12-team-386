@@ -36,7 +36,7 @@ class BoardsController < ApplicationController
       end
     end
 
-    if @boards.count == 0 && @invited_boards.count == 0
+    if @boards.count == 0 && @authorized.nil?
       flash[:notice] = "Please use the bookmarklet on Flipkart to get started."
     end
   end
