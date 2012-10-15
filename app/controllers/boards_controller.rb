@@ -55,9 +55,9 @@ class BoardsController < ApplicationController
   end
 
   def authorized_user
+    @board = Board.find(params[:id])
     logger.info "Board id #{@board.id}"
     logger.info "current_user.uid #{current_user.uid}"
-    @board = Board.find(params[:id])
     if current_user != @board.user
       if !@board.authorized_uids.include? current_user.uid
         logger.info "authorized_uids = #{@board.authorized_uids}"
