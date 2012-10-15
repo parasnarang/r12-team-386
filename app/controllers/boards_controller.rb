@@ -59,7 +59,7 @@ class BoardsController < ApplicationController
     logger.info "Board id #{@board.id}"
     logger.info "current_user.uid #{current_user.uid}"
     if current_user != @board.user
-      if !@board.authorized_uids.include? current_user.uid
+      if !@board.authorized_uids.select("uid").include? current_user.uid
         logger.info "authorized_uids = #{@board.authorized_uids}"
         flash[:error] = "Access Denied"
         redirect_to root_path
